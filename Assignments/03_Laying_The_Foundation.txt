@@ -1,0 +1,13 @@
+#What is JSX?
+#####Answer
+JSX is a HTML or XML like syntax. It stands for Javascript XML. It is syntax extension for Javascript.
+It is not HTML inside Javascript. It is not a part of React. Without of JSX also we can write our react code but it 
+will be very hard to read.
+Javascript engine does not understand JSX.
+
+#Superpowers of JSX
+#####Answer
+we can embed
+ ● Roleof type attribute in script tag? What options can I use there?
+ ● {TitleComponent} vs {<TitleComponent/>} vs
+ {<TitleComponent></TitleComponent>} in JSX

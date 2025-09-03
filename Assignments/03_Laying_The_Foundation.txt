@@ -1,13 +1,147 @@
 #What is JSX?
-#####Answer
-JSX is a HTML or XML like syntax. It stands for Javascript XML. It is syntax extension for Javascript.
-It is not HTML inside Javascript. It is not a part of React. Without of JSX also we can write our react code but it 
-will be very hard to read.
-Javascript engine does not understand JSX.
+JSX (JavaScript XML) is a syntax extension for JavaScript that allows you to write HTML-like markup. It's primarily used with React to describe what the UI should look like. It is not the part of React. Without JSX also we can write code. But it will be very difficult to read the code. It is not HTML inside Javascript.
 
-#Superpowers of JSX
-#####Answer
-we can embed
- ● Roleof type attribute in script tag? What options can I use there?
- ● {TitleComponent} vs {<TitleComponent/>} vs
- {<TitleComponent></TitleComponent>} in JSX
+jsx
+const element = <h1>Hello, World!</h1>;
+JSX gets transpiled by tools like Babel into regular JavaScript function calls:
+
+javascript
+// JSX
+const element = <h1>Hello, World!</h1>;
+
+// Transpiled JavaScript
+const element = React.createElement('h1', null, 'Hello, World!');
+
+# Superpowers of JSX
+
+1. JavaScript Expression Embedding
+You can embed any JavaScript expression inside curly braces {}:
+
+jsx
+const name = "React";
+const element = <h1>Hello, {name}!</h1>;
+const result = <div>{2 + 3}</div>; // Displays 5
+
+2. Component Composition
+Seamlessly compose and nest React components:
+
+jsx
+<Header />
+<MainContent>
+  <Sidebar />
+  <ArticleList />
+</MainContent>
+<Footer />
+3. Conditional Rendering
+Use JavaScript logic directly in markup:
+
+jsx
+{isLoggedIn ? <Dashboard /> : <LoginForm />}
+{items.length > 0 && <ItemList items={items} />}
+4. Dynamic Lists
+Map over arrays to create dynamic content:
+
+jsx
+{users.map(user => <UserCard key={user.id} user={user} />)}
+5. Event Handling
+Attach event handlers using camelCase syntax:
+
+jsx
+<button onClick={handleClick}>Click me</button>
+<input onChange={handleInputChange} />
+6. Type Safety
+Works seamlessly with TypeScript for compile-time error checking:
+
+tsx
+interface Props {
+  title: string;
+  count: number;
+}
+
+const Component: React.FC<Props> = ({ title, count }) => (
+  <div>{title}: {count}</div>
+);
+Role of type Attribute in Script Tag
+The type attribute in script tags specifies the MIME type of the script. Here are the main options:
+
+JavaScript Types:
+xml
+<script type="text/javascript">  <!-- Default, can be omitted -->
+<script type="application/javascript">
+<script type="module">           <!-- ES6 modules -->
+JSX/React Types:
+xml
+<script type="text/jsx">         <!-- JSX syntax -->
+<script type="text/babel">       <!-- Babel transpilation -->
+Other Types:
+xml
+<script type="application/json"> <!-- JSON data -->
+<script type="text/template">    <!-- Template scripts -->
+<script type="importmap">        <!-- Import maps -->
+For React Development:
+xml
+<!-- Development with Babel -->
+<script type="text/babel">
+  const App = () => <h1>Hello React!</h1>;
+  ReactDOM.render(<App />, document.getElementById('root'));
+</script>
+
+<!-- Production (pre-compiled) -->
+<script type="text/javascript" src="bundle.js"></script>
+JSX Component Syntax Differences
+{TitleComponent}
+jsx
+{TitleComponent}
+What it does: References the component function/class itself
+
+Result: Displays the function definition as text or [object Object]
+
+Use case: Passing component as a prop, not rendering it
+
+{<TitleComponent/>}
+jsx
+{<TitleComponent/>}
+What it does: Renders the component (self-closing tag)
+
+Result: Executes the component and displays its JSX return
+
+Use case: Standard way to render components without children
+
+{<TitleComponent></TitleComponent>}
+jsx
+{<TitleComponent></TitleComponent>}
+What it does: Renders the component (opening/closing tags)
+
+Result: Same as self-closing version, executes and displays component
+
+Use case: When you need to pass children or prefer explicit closing tags
+
+Practical Example:
+jsx
+const TitleComponent = () => <h1>My Title</h1>;
+
+function App() {
+  return (
+    <div>
+      {/* Wrong - shows function definition */}
+      <p>{TitleComponent}</p>
+      
+      {/* Correct - renders the component */}
+      {<TitleComponent/>}
+      
+      {/* Also correct - same result */}
+      {<TitleComponent></TitleComponent>}
+      
+      {/* With children */}
+      {<TitleComponent>
+        <span>Child content</span>
+      </TitleComponent>}
+    </div>
+  );
+}
+Key Takeaway:
+Use {TitleComponent} when passing the component as a reference
+
+Use {<TitleComponent/>} or {<TitleComponent></TitleComponent>} when you want to render the component
+
+The angle brackets < > are what tell JSX to execute/render the component
